@@ -5,6 +5,7 @@
 #ifndef CPPCOROUTINES_04_TASK_TASK_H_
 #define CPPCOROUTINES_04_TASK_TASK_H_
 
+#include <iostream>
 #include "coroutine_common.h"
 #include "TaskPromise.h"
 
@@ -29,6 +30,7 @@ struct Task {
   }
 
   Task &catching(std::function<void(std::exception &)> &&func) {
+    std::cout << __func__ << std::endl;
     handle.promise().on_completed([func](auto result) {
       try {
         result.get_or_throw();

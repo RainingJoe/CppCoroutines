@@ -5,6 +5,7 @@
 #ifndef CPPCOROUTINES_TASKS_04_TASK_TASKPROMISE_H_
 #define CPPCOROUTINES_TASKS_04_TASK_TASKPROMISE_H_
 
+#include <iostream>
 #include <functional>
 #include <mutex>
 #include <list>
@@ -56,6 +57,8 @@ struct TaskPromise {
   }
 
   void on_completed(std::function<void(Result<ResultType>)> &&func) {
+    std::cout << __func__ << std::endl;
+    std::cout << __LINE__ << std::endl;
     std::unique_lock lock(completion_lock);
     if (result.has_value()) {
       auto value = result.value();

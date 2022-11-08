@@ -7,5 +7,7 @@
 
 #define __cpp_lib_coroutine
 #include <coroutine>
+#include <thread>
+#include <condition_variable>
 
 #endif //CPPCOROUTINES_TASKS_04_TASK_COROUTINE_COMMON_H_

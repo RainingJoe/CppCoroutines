@@ -3,6 +3,8 @@ project(CppCoroutines-Tasks)
 
 set(CMAKE_CXX_STANDARD 20)
 
+set(CMAKE_CXX_FLAGS "-fcoroutines -lpthread")
+
 add_executable("coroutine-task"
         main.cpp
         io_utils.cpp)
