@@ -47,6 +47,7 @@ class LooperExecutor : public AbstractExecutor {
   std::thread work_thread;
 
   void run_loop() {
+    debug("run_loop start.");
     while (is_active.load(std::memory_order_relaxed) || !executable_queue.empty()) {
       std::unique_lock lock(queue_lock);
       if (executable_queue.empty()) {
@@ -58,7 +59,6 @@ class LooperExecutor : public AbstractExecutor {
       auto func = executable_queue.front();
       executable_queue.pop();
       lock.unlock();
-
       func();
     }
     debug("run_loop exit.");
@@ -67,11 +67,13 @@ class LooperExecutor : public AbstractExecutor {
  public:
 
   LooperExecutor() {
+    debug("__LINE__");
     is_active.store(true, std::memory_order_relaxed);
     work_thread = std::thread(&LooperExecutor::run_loop, this);
   }
 
   ~LooperExecutor() {
+    debug("__LINE__");
     shutdown(false);
     if (work_thread.joinable()) {
       work_thread.join();

@@ -20,11 +20,12 @@ class Task;
 
 template<typename ResultType, typename Executor>
 struct TaskPromise {
-  DispatchAwaiter initial_suspend() { return DispatchAwaiter{&executor}; }
+  DispatchAwaiter initial_suspend() { debug(__LINE__); return DispatchAwaiter{&executor}; }
 
   std::suspend_always final_suspend() noexcept { return {}; }
 
   Task<ResultType, Executor> get_return_object() {
+    debug(__LINE__);
     return Task{std::coroutine_handle<TaskPromise>::from_promise(*this)};
   }
 

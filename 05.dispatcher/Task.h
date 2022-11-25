@@ -44,7 +44,7 @@ struct Task {
     return *this;
   }
 
-  explicit Task(std::coroutine_handle<promise_type> handle) noexcept: handle(handle) {}
+  explicit Task(std::coroutine_handle<promise_type> handle) noexcept: handle(handle) {debug(__LINE__);}
 
   Task(Task &&task) noexcept: handle(std::exchange(task.handle, {})) {}
 

@@ -61,14 +61,18 @@ void test_tasks() {
 }
 
 int main() {
-  test_tasks();
+  // test_tasks();
 
-  auto looper = LooperExecutor();
+  /*下面这部分已经注释掉的代码，压根和前面的test_task没有任何关系，他只想表明Executor的执行过程*/
+  // auto looper = LooperExecutor();
 
-  using namespace std::chrono_literals;
-  std::this_thread::sleep_for(1s);
-  looper.shutdown(false);
-  std::this_thread::sleep_for(1s);
+  // using namespace std::chrono_literals;
+  // std::this_thread::sleep_for(1s);
+  // looper.shutdown(false);
+  // std::this_thread::sleep_for(1s);
+
+  //这个schedule也是，其实他和executor一样，只是一种延迟调度器而已
+  test_scheduler();
 
   return 0;
 }
